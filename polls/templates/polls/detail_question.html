@@ -1,0 +1,27 @@
+{%extends 'polls/base.html'%}
+
+{%block content%}
+
+{%if question.choice_set.all %}
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <ul>
+        {% for item in question.choice_set.all %}
+        <li>
+            <input type="radio" value="{{item.id}}" name="choice">
+            {{item.content}}
+        </li>
+        {% endfor %}
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </ul>
+</form>
+{% else %}
+<h3 style="color:red;">
+    Chưa có câu trả lời !!!
+</h3>
+
+{% endif %}
+
+{% endblock %}

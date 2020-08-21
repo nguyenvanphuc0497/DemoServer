@@ -1,0 +1,14 @@
+{%extends 'polls/base.html'%}
+
+{%block content%}
+<h1>This is Template</h1>
+<p>Hello, My name is <b>{{name}} </b></p>
+<h2>Tai san cua toi gom: </h2>
+<ul>
+    {% for item in tai_san %}
+    <li>
+        {{item}}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
