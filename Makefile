@@ -1,12 +1,12 @@
 migrate:
 	### Run makemigrations
-	@python ./demo-server/manage.py makemigrations
+	@python manage.py makemigrations
 	### Run migrate
-	@python ./demo-server/manage.py migrate
+	@python manage.py migrate
 
 run:
 	### Run server
-	@python ./demo-server/manage.py runserver
+	@python manage.py runserver
 
 backup_venv:
 	### Run freeze check list
@@ -17,4 +17,4 @@ backup_venv:
 
 shell:
 	### Run server on shell
-	@python ./demo-server/manage.py shell
+	@python manage.py shell
