@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  data:
+    image: postgres:11.1-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: 'dockerdb'
+      POSTGRES_USER: 'docker'
+      POSTGRES_PASSWORD: 'docker'
+    restart: always
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - data
+    entrypoint:
+      - /demo-server/docker-entrypoint.sh

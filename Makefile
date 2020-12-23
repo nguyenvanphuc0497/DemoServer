@@ -31,3 +31,6 @@ test:
 	if [ "0" != "0" ]; then 
 		echo "okok"
 	fi;
+
+docker_up:
+	@docker-compose up
