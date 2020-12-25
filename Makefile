@@ -1,20 +1,33 @@
-migrate:
-	### Run makemigrations
-	@python ./demo-server/manage.py makemigrations
-	### Run migrate
-	@python ./demo-server/manage.py migrate
+CPPFLAGS = -I include
+P_CMD = python
+F_CMD = manage.py
 
-run:
+s_venv:
+	### activate source
+	@. venv/bin/activate
+
+migrate: $(F_CMD)
+	### Run makemigrations
+	@$(P_CMD) $< makemigrations
+	### Run migrate
+	@${P_CMD} $< $@
+
+run: $(F_CMD) s_venv
 	### Run server
-	@python ./demo-server/manage.py runserver
+	@${P_CMD} $< $@server
 
 backup_venv:
 	### Run freeze check list
 	@pip freeze
 	@@read -p "Do you want to continue [Y/n]? " -n 1 -r; \
 	### Run freeze
-	@pip freeze > requirements.txt
+	@test -d requirements.txt || pip freeze > requirements.txt . echo "xxx"
 
-shell:
+shell: $(F_CMD)
 	### Run server on shell
-	@python ./demo-server/manage.py shell
+	@$(P_CMD) $< $@
+
+test:
+	if [ "0" != "0" ]; then 
+		echo "okok"
+	fi;
