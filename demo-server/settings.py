@@ -74,15 +74,52 @@ WSGI_APPLICATION = 'demo-server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DB_LOGER = {
+LOGGING = {
     'version': 1,
-    'loggers': {
-        'djongo': {
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
             'level': 'DEBUG',
-            'propogate': False,
-        }
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+            'filters': ['require_debug_true'],
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR + '/debug.log',
+            'formatter': 'verbose',
+            'filters': ['require_debug_true'],
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
     },
 }
+
+MEDIA_URL = '/media/'
 
 DATABASES = {
     'default': {
@@ -97,7 +134,7 @@ DATABASES = {
             'authSource': 'admin',
             'authMechanism': 'SCRAM-SHA-1'
         },
-        'LOGGING': DB_LOGER,
+        'LOGGING': LOGGING,
     }
 }
 
