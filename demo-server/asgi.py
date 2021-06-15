@@ -17,6 +17,7 @@ from django.core.asgi import get_asgi_application
 import game.routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'demo-server.settings')
+django.setup()
 
 # application = get_asgi_application()
 application = ProtocolTypeRouter({
