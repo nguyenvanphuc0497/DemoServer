@@ -69,7 +69,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'demo-server.wsgi.application'
+# WSGI_APPLICATION = 'demo-server.wsgi.application'
+# Channels
+ASGI_APPLICATION = "demo-server.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -136,6 +138,27 @@ DATABASES = {
         },
         'LOGGING': LOGGING,
     }
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        ## Method 1: Via redis lab
+        # 'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        # 'CONFIG': {
+        #     "hosts": [
+        #       'redis://h:le16Dn6dYwGHOZLF9vWxySxmQSIwE4Zz@redis-12573.c99.us-east-1-4.ec2.cloud.redislabs.com:12573'
+        #     ],
+        # }
+
+        ## Method 2: Via local redis
+        # 'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        # 'CONFIG': {
+        #     # "hosts": [('127.0.0.1', 6379)],
+        # },
+
+        ## Method 3: Via In-memory channel layer
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    },
 }
 
 # Password validation
