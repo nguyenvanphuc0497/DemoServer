@@ -21,4 +21,5 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path("news/", include("news.urls")),
     path("file/", include("file.urls")),
+    path("game/", include("game.urls")),
 ]
